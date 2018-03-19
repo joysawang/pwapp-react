@@ -1,19 +1,46 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Router, Route, Switch } from 'react-router-dom';
+import { createBrowserHistory, createHashHistory } from 'history';
 import './App.css';
+
+class Home extends Component {
+  render() {
+    return (
+      <div className='container'>
+        <p>Welcome to Application</p>
+        <p>PWA with ReactJS</p>
+        <button className='btn btn-primary' onClick={() => this.props.history.push('/login')}>Login</button>
+      </div>
+    );
+  }
+}
+
+class Login extends Component {
+  render() {
+    return (
+      <div className='container'>
+        <p>Login Form</p>
+        <button className='btn btn-primary' onClick={() => this.props.history.goBack()}>Back</button>
+      </div>
+    );
+  }
+}
+
+const configureHistory = () => {
+  return window.matchMedia('(display-mode: standalone)').matches
+    ? createHashHistory()
+    : createBrowserHistory()
+}
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Router history={configureHistory()}>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={Login} />
+        </Switch>
+      </Router>
     );
   }
 }
