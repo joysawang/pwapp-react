@@ -1,48 +1,24 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
-import { createBrowserHistory, createHashHistory } from 'history';
-import './App.css';
+import { configureHistory } from './config/routes';
 
-class Home extends Component {
-  render() {
-    return (
-      <div className='container'>
-        <p>Welcome to Application</p>
-        <p>PWA with ReactJS</p>
-        <button className='btn btn-primary' onClick={() => this.props.history.push('/login')}>Login</button>
-      </div>
-    );
-  }
-}
+// Import views component
+import Login from './views/login';
+import Register from './views/register';
+import Home from './views/home';
 
-class Login extends Component {
-  render() {
-    return (
-      <div className='container'>
-        <p>Login Form</p>
-        <button className='btn btn-primary' onClick={() => this.props.history.goBack()}>Back</button>
-      </div>
-    );
-  }
-}
-
-const configureHistory = () => {
-  return window.matchMedia('(display-mode: standalone)').matches
-    ? createHashHistory()
-    : createBrowserHistory()
-}
-
-class App extends Component {
+class AppWithRouter extends Component {
   render() {
     return (
       <Router history={configureHistory()}>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
+          <Route exact path="/" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/home" component={Home} />
         </Switch>
       </Router>
     );
   }
 }
 
-export default App;
+export default AppWithRouter;
