@@ -1,6 +1,7 @@
-import Navbar, { BackButton } from './Navbar';
+import Navbar, { BackButton, DrawerButton } from './Navbar';
 
 export {
   Navbar,
-  BackButton
+  BackButton,
+  DrawerButton
 }

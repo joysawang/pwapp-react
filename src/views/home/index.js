@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Flex } from 'antd-mobile';
-import { Navbar } from './../../components';
+import { Navbar, DrawerButton } from './../../components';
 
 class Home extends Component {
   render () {
     return (
-      <div>
-        <Navbar />
+      <div className="app-container">
+        <Navbar
+          leftComponent={<DrawerButton {...this.props} />}
+        />
         <div className="content-container">
           <Flex direction="column" className="getstart-container">
             <h1 className="text-app-name">PWA React</h1>

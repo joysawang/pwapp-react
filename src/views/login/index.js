@@ -154,7 +154,7 @@ class Login extends Component {
     }
 
     return (
-      <div>
+      <div className="app-container">
         <Navbar />
         <div className="content-container">
           <Flex direction="column" justify="center" className="intro-container">

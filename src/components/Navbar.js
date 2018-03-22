@@ -11,6 +11,16 @@ export class BackButton extends Component {
   }
 }
 
+export class DrawerButton extends Component {
+  render () {
+    return (
+      <div className="navbar-items">
+        <Icon size="md" type="ellipsis" />
+      </div>
+    );
+  }
+}
+
 class Navbar extends Component {
   render () {
     const {

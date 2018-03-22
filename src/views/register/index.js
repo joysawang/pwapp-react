@@ -169,7 +169,7 @@ class Register extends Component {
     }
 
     return (
-      <div>
+      <div className="app-container">
         <Navbar
           leftComponent={<BackButton {...this.props} />}
         />

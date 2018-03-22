@@ -47,20 +47,42 @@ button, .button {
   max-width: 100%;
   margin: 0 auto;
 }
-.content-container {
-  margin-top: -1px;
-  height: calc(100vh - 44px);
-  overflow-y: auto;
-  overflow-x: hidden;
+.app-container {
+  position: fixed;
+  width: 100%;
+  background-color: #f3f6f9;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 .navbar-container {
   margin: 0;
-  z-index: 1;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
   width: 100%;
   background-color: #21242b;
 }
 .navbar-items {
   cursor: pointer;
+}
+.content-container {
+  position: absolute;
+  top: 44px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: auto;
+  height: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .intro-container {
   min-height: calc(100vh - 44px);
@@ -101,7 +123,9 @@ button, .button {
   margin-bottom: 2px;
 }
 .form-login {
-  padding: 30px 15px;
+  padding: 0 15px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   width: 25%;
 }
 .form-control {
@@ -155,11 +179,25 @@ button, .button {
 .has-error .form-control {
   border: 1px solid red;
 }
+.hidden-xs {
+  display: block;
+}
 
+@media (max-width: 768px) and (min-width: 600px) {
+  .logo-container {
+    width: 35%;
+  }
+  .form-login {
+    width: 50%;
+  }
+}
 
 @media (max-width: 599px) and (min-width: 0px) {
   .logo-container {
     width: 50%;
+  }
+  .hidden-xs {
+    display: none;
   }
   .form-login {
     width: 75%;
