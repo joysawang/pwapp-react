@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Flex } from 'antd-mobile';
 import { Navbar, DrawerButton } from './../../components';
 
@@ -6,9 +8,7 @@ class Home extends Component {
   render () {
     return (
       <div className="app-container">
-        <Navbar
-          leftComponent={<DrawerButton {...this.props} />}
-        />
+        <Navbar leftComponent={<DrawerButton />} />
         <div className="content-container">
           <Flex direction="column" className="getstart-container">
             <h1 className="text-app-name">PWA React</h1>
@@ -17,8 +17,8 @@ class Home extends Component {
                 <img className="img-responsive" alt="img-logo" src={require('./../../assets/img/react-icon.png')} />
               </div>
             }
-            <p className="text-app-desc">Welcome to Progressive Web Application</p>
-            <p className="text-app-desc">with React Javascript</p>
+            <p className="text-app-desc">Progressive Web Application</p>
+            <p className="text-app-desc">with React & Redux</p>
             <p className="text-app-desc">Hosting Google Firebase</p>
           </Flex>
           <div className="container">
@@ -43,7 +43,7 @@ class Home extends Component {
             </div>
             <div className="row">
               <p>Visit
-                <a className="entrance" href="http://localhost:3001" rel="see more" target="_blank">http://localhost:3001</a>
+                <a className="entrance" href="http://localhost:3001" rel="see more">http://localhost:3001</a>
                 to see the boilerplate in action!
               </p>
             </div>
@@ -54,4 +54,8 @@ class Home extends Component {
   }
 }
 
-export default Home
+const mapStateToProps = (state) => {
+  return state;
+}
+
+export default withRouter(connect(mapStateToProps)(Home));

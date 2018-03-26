@@ -182,6 +182,60 @@ button, .button {
 .hidden-xs {
   display: block;
 }
+.drawer {
+  position: fixed;
+  width: 25%;
+  left: -26%;
+  height: calc(100vh - 45px);
+  top: 45px;
+  bottom: 0;
+  cursor: default;
+  z-index: 9999;
+  overflow-y: auto;
+}
+.drawer-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  /*width: 100%;*/
+  height: 100%;
+  background-color: #21242b;
+}
+.drawer {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.drawer.open {
+  display: block;
+}
+.drawer.open{
+  left: 0;
+}
+.menu {
+  display: block;
+  float: left;
+  min-width: 15vw;
+  width: 100%;
+  list-style: none;
+}
+.menu-items {
+  display: block;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.menu-items.active,
+.menu-items:hover {
+  color: #61dafb;
+  background-color: #383838;
+}
+.img-avatar {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
 
 @media (max-width: 768px) and (min-width: 600px) {
   .logo-container {
@@ -210,5 +264,12 @@ button, .button {
   }
   .error-label {
     font-size: 11px;
+  }
+  .drawer {
+    left: -51%;
+    width: 50%;
+  }
+  .menu {
+    min-width: 50vw;
   }
 }

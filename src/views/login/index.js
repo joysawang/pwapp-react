@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 import { Flex, InputItem, Button, Modal, ActivityIndicator } from 'antd-mobile';
 import { Navbar } from './../../components';
+import * as actionAuth from './../../actions/authAction';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isReady: false,
-      handleSubmit: false,
       form: {
         rules: {
           username: {
@@ -46,25 +49,10 @@ class Login extends Component {
   onSubmit() {
     try {
       if (this.validate()) {
-        this.setState({ handleSubmit: true });
-
         const username = this.state.form.fields.username.value;
         const password = this.state.form.fields.password.value;
 
-        setTimeout(() => {
-          if (username === 'pwareact' && password === 'pwa@react') {
-            this.setState({ handleSubmit: false });
-            this.props.history.replace('/home');
-          } else {
-            this.setState({
-              handleSubmit: false
-            }, () => {
-              Modal.alert('', 'Invalid Username or Password', [
-                { text: 'Try Again' }
-              ]);
-            });
-          }
-        }, 1000);
+        this.props.actions.onLogin(username, password);
       }
     } catch (e) {
       console.log(e);
@@ -153,6 +141,8 @@ class Login extends Component {
       return null;
     }
 
+    const { auth } = this.props;
+
     return (
       <div className="app-container">
         <Navbar />
@@ -164,24 +154,30 @@ class Login extends Component {
                 <img className="img-responsive" alt="img-logo" src={require('./../../assets/img/react-icon.png')} />
               </div>
             }
-            <p className="text-app-desc">Welcome to Progressive Web Application</p>
-            <p className="text-app-desc">with React Javascript</p>
+            <p className="text-app-desc">Progressive Web Application</p>
+            <p className="text-app-desc">with React & Redux</p>
             <p className="text-app-desc">Hosting Google Firebase</p>
             <div className="form-login">
               { this.renderInput(this.state.form, 'username') }
               { this.renderInput(this.state.form, 'password') }
+              {
+                auth.hasError &&
+                <div className="form-group">
+                  <label className="error-msg">{auth.errorMessage}</label>
+                </div>
+              }
               <div className="form-group">
-                <Button className="button button-primary" activeClassName="button-active" onClick={() => this.onSubmit()} disabled={this.state.handleSubmit || this.state.form.hasError}>Login</Button>
+                <Button className="button button-primary" activeClassName="button-active" onClick={() => this.onSubmit()} disabled={auth.handleSubmit || this.state.form.hasError}>Login</Button>
               </div>
               <div className="form-group">
-                <Button className="button button-register" onClick={() => this.props.history.push('/register')} activeClassName="button-active" disabled={this.state.handleSubmit}>Register</Button>
+                <Button className="button button-register" onClick={() => this.props.history.push('/register')} activeClassName="button-active" disabled={auth.handleSubmit}>Register</Button>
               </div>
             </div>
           </Flex>
         </div>
         {
           <Modal
-            visible={this.state.handleSubmit}
+            visible={auth.handleSubmit}
             transparent
             maskClosable={false}
           >
@@ -195,4 +191,14 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return state;
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(actionAuth, dispatch)
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

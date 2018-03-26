@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Flex, InputItem, Button, Modal } from 'antd-mobile';
+import { connect } from 'react-redux';
+import { Flex, InputItem, Button } from 'antd-mobile';
 import { Navbar, BackButton } from './../../components';
 
 class Register extends Component {
@@ -66,10 +67,6 @@ class Register extends Component {
           form.fields.confirmPassword.value = '';
 
           this.setState({ form });
-
-          Modal.alert('', 'Register Complete !!', [
-            { text: 'OK' }
-          ]);
         });
       }
     } catch (e) {
@@ -196,4 +193,8 @@ class Register extends Component {
   }
 }
 
-export default Register;
+const mapStateToProps = (state) => {
+  return state;
+}
+
+export default connect(mapStateToProps)(Register);
