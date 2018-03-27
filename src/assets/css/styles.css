@@ -235,7 +235,21 @@ button, .button {
   border-radius: 50%;
   overflow: hidden;
 }
-
+.app-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #fff;
+}
+.error-header {
+  font-size: 10em;
+  font-weight: bold;
+}
+.error-text {
+  font-size: 1.75em;
+}
 
 @media (max-width: 768px) and (min-width: 600px) {
   .logo-container {
@@ -247,6 +261,12 @@ button, .button {
 }
 
 @media (max-width: 599px) and (min-width: 0px) {
+  .error-header {
+    font-size: 5em;
+  }
+  .error-text {
+    font-size: 1em;
+  }
   .logo-container {
     width: 50%;
   }
